@@ -1,5 +1,6 @@
 import telebot, settings
 from scanner import Scanner, ScannerHandler
+from time import sleep
 
 bot = telebot.TeleBot(settings.read()["token"])
 scanner_handler = ScannerHandler()
@@ -19,8 +20,15 @@ def callback_function(tx):
     if amount>0: change = "BUY"
     else: change = "SELL"
     text = f'https://solscan.io/tx/{tx_data["sig"]}\n\nWALLET: {tx_data["address"]}\n{change} {tx_data["amount"]}\nTOKEN:{tx_data["token"]}\nPreBalance: {tx_data["pre_balance"]}\nPostBalance: {tx_data["post_balance"]}'
-    for user_id in users:
-        bot.send_message(user_id,text)
+    while True:
+        try:
+            for user_id in users:
+                bot.send_message(user_id,text)
+            break
+        except Exception as e:
+            print(e)
+            print("sleeping for 10s")
+            sleep(10)
 
 @bot.message_handler(commands=['start'])
 def start(message):
