@@ -1,0 +1,6 @@
+__pycache__
+.vscode
+
+last_txs
+settings.json
+proxy.txt
