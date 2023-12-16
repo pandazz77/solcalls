@@ -1,7 +1,8 @@
 import json
 
 _CONTENT = """
-{   "token": "bot_token",
+{   
+    "token": "bot_token",
     "scanner_interval":10,"scanner_handler_interval":10, 
     "wallets": [], 
     "users": []
