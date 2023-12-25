@@ -32,7 +32,8 @@ def callback_function(tx):
 
 @bot.message_handler(commands=['start'])
 def start(message):
-    settings.add_user(message.from_user.id)
+    if message.from_user.id not in settings.get_users(): return
+    #settings.add_user(message.from_user.id)
     bot.send_message(message.from_user.id, "Hello, im SolTraderTracker", reply_markup=markup)
     if message.from_user.id in stages: stages.pop(message.from_user.id)
 
